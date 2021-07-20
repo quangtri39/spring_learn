@@ -1,9 +1,8 @@
 package com.dqtri.myCompany.controller;
 
-import com.dqtri.myCompany.entity.Category;
 import com.dqtri.myCompany.entity.Product;
+import com.dqtri.myCompany.exception.ProductNotFoundException;
 import com.dqtri.myCompany.service.ProductService;
-import com.dqtri.myCompany.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +23,17 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}")
-    public Product getProductById(@PathVariable("id") Long productId){
+    public Product getProductById(@PathVariable("id") Long productId) throws ProductNotFoundException {
         return productService.getProductById(productId);
     }
+
+    @GetMapping("/products/name/{name}")
+    public List<Product> getProductById(@PathVariable("name") String nameProduct) throws ProductNotFoundException {
+        return productService.getProductByName(nameProduct);
+    }
+
     @DeleteMapping("/products/{id}")
-    public String deleteProductById(@PathVariable("id") Long productId){
+    public String deleteProductById(@PathVariable("id") Long productId) throws ProductNotFoundException {
         productService.deleteProductById(productId);
         return "Product delete success!";
     }
