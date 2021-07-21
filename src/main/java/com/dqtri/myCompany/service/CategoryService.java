@@ -1,16 +1,17 @@
 package com.dqtri.myCompany.service;
 
 import com.dqtri.myCompany.entity.Category;
+import com.dqtri.myCompany.entity.CategoryDto;
 import com.dqtri.myCompany.exception.CategoryNotFoundException;
 
 import java.util.List;
 
 public interface CategoryService {
-    List<Category> getCategoryList();
+    List<CategoryDto> getCategoryList();
 
-    Category saveCategory(Category category);
+    CategoryDto saveCategory(CategoryDto categoryDto);
 
-    Category getCategoryById(Long categoryId) throws CategoryNotFoundException;
+    CategoryDto getCategoryById(Long categoryId) throws CategoryNotFoundException;
 
     void deleteCategoryById(Long categoryId) throws CategoryNotFoundException;
 }

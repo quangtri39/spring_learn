@@ -2,18 +2,19 @@ package com.dqtri.myCompany.service;
 
 
 import com.dqtri.myCompany.entity.Product;
+import com.dqtri.myCompany.entity.ProductDto;
 import com.dqtri.myCompany.exception.ProductNotFoundException;
 
 import java.util.List;
 
 public interface ProductService {
-    Product saveProduct(Product product);
+    ProductDto saveProduct(ProductDto productDto);
 
-    List<Product> getProductList();
+    List<ProductDto> getProductList();
 
-    Product getProductById(Long productId) throws ProductNotFoundException;
+    ProductDto getProductById(Long productId) throws ProductNotFoundException;
 
     void deleteProductById(Long productId) throws ProductNotFoundException;
 
-    List<Product> getProductByName(String nameProduct);
+    List<ProductDto> getProductByName(String nameProduct);
 }

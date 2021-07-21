@@ -27,6 +27,12 @@ public class Product {
     private String name;
     private String Description;
     private LocalDate createdDate;
+
+    public void loadFromDto(ProductDto productDto){
+        this.name = productDto.getName();
+        this.Description = productDto.getDescription();
+        this.createdDate = productDto.getCreatedDate();
+    }
 //
 //    @ManyToOne()
 //    private Category category;

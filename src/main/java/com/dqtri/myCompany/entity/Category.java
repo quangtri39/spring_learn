@@ -36,4 +36,9 @@ public class Category {
             referencedColumnName = "id"
     )
     private List<Product> products;
+
+    public void loadFromEntity(CategoryDto categoryDto){
+        this.name = categoryDto.getName();
+        this.createdDate = categoryDto.getCreatedDate();
+    }
 }

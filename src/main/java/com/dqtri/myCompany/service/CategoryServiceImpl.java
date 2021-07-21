@@ -1,6 +1,8 @@
 package com.dqtri.myCompany.service;
 
+import com.dqtri.myCompany.Converter.CategoryConverter;
 import com.dqtri.myCompany.entity.Category;
+import com.dqtri.myCompany.entity.CategoryDto;
 import com.dqtri.myCompany.exception.CategoryNotFoundException;
 import com.dqtri.myCompany.repository.CaterogyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +13,28 @@ import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
+    private final CategoryConverter converter = new CategoryConverter();
     @Autowired
     private CaterogyRepository caterogyRepository;
     @Override
-    public List<Category> getCategoryList() {
-        return caterogyRepository.findAll();
+    public List<CategoryDto> getCategoryList() {
+        return converter.listCategoryEntityToListDTO(caterogyRepository.findAll());
     }
 
     @Override
-    public Category saveCategory(Category category) {
-        return caterogyRepository.save(category);
+    public CategoryDto saveCategory(CategoryDto categoryDto) {
+        Category category = converter.categoryDTOToEntity(categoryDto);
+        Category returnCategory = caterogyRepository.save(category);
+        return converter.categoryEntityToDTO(returnCategory);
     }
 
     @Override
-    public Category getCategoryById(Long categoryId) throws CategoryNotFoundException {
+    public CategoryDto getCategoryById(Long categoryId) throws CategoryNotFoundException {
         Optional<Category> category = caterogyRepository.findById(categoryId);
         if(!category.isPresent()){
             throw new CategoryNotFoundException("Category by id " + categoryId + " is not exists!");
         }
-        return category.get();
+        return converter.categoryEntityToDTO(category.get());
     }
 
     @Override

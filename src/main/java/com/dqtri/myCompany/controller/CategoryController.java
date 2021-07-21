@@ -1,6 +1,7 @@
 package com.dqtri.myCompany.controller;
 
 import com.dqtri.myCompany.entity.Category;
+import com.dqtri.myCompany.entity.CategoryDto;
 import com.dqtri.myCompany.exception.CategoryNotFoundException;
 import com.dqtri.myCompany.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,17 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/categories")
-    public List<Category> getProductList(){
+    public List<CategoryDto> getProductList(){
         return categoryService.getCategoryList();
     }
 
     @PostMapping("/categories")
-    public Category saveProduct(@RequestBody Category category){
-        return categoryService.saveCategory(category);
+    public CategoryDto saveProduct(@RequestBody CategoryDto categoryDto){
+        return categoryService.saveCategory(categoryDto);
     }
 
     @GetMapping("/categories/{id}")
-    public Category getCategoryById(@PathVariable("id") Long categoryId) throws CategoryNotFoundException {
+    public CategoryDto getCategoryById(@PathVariable("id") Long categoryId) throws CategoryNotFoundException {
         return categoryService.getCategoryById(categoryId);
     }
 
